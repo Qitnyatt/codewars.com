@@ -48,6 +48,18 @@ def language2file_ext(s: str) -> str:
     }.get(s, unknown_language)()
 
 
+def language2comment_delimiter(language: str) -> str:
+    def unknown_language():
+        raise Exception('Unknown Language')
+
+    return {
+        'php':        lambda: '//',
+        'python':     lambda: '#',
+        'javascript': lambda: '//'
+
+    }.get(language, unknown_language)()
+
+
 def main():
     url: str = ''.join(sys.argv[1:])
     assert len(url) != 0, f'"url={url}"'
@@ -83,6 +95,8 @@ def main():
     if filename.exists():
         raise FileExistsError(filename)
     filename.touch()
+    with open(f'{filename}', mode='a', encoding='utf-8') as fh_out:
+        fh_out.write(f'{language2comment_delimiter(language)} {url}\n')
 
 
 if __name__ == '__main__':
