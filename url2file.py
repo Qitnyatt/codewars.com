@@ -15,9 +15,10 @@ def get_language(url: str) -> str:
         raise Exception('Unknown Language')
 
     return {
-        'php':        lambda: 'php',
-        'python':     lambda: 'python',
-        'javascript': lambda: 'javascript'
+        'php':          lambda: 'php',
+        'python':       lambda: 'python',
+        'javascript':   lambda: 'javascript',
+        'coffeescript': lambda: 'coffeescript',
 
     }.get(url.split('/')[-1], unknown_language)()
 
@@ -41,9 +42,10 @@ def language2file_ext(s: str) -> str:
         raise Exception('Unknown Language')
 
     return {
-        'php':        lambda: '.php',
-        'python':     lambda: '.py',
-        'javascript': lambda: '.js'
+        'php':          lambda: '.php',
+        'python':       lambda: '.py',
+        'javascript':   lambda: '.js',
+        'coffeescript': lambda: '.coffee',
 
     }.get(s, unknown_language)()
 
@@ -53,9 +55,10 @@ def language2comment_delimiter(language: str) -> str:
         raise Exception('Unknown Language')
 
     return {
-        'php':        lambda: '//',
-        'python':     lambda: '#',
-        'javascript': lambda: '//'
+        'php':          lambda: '//',
+        'python':       lambda: '#',
+        'javascript':   lambda: '//',
+        'coffeescript': lambda: '#',
 
     }.get(language, unknown_language)()
 
